@@ -1,38 +1,127 @@
+
 .App {
-  text-align: center;
+  margin: 30px 30px;
+  font-family: 'Roboto', sans-serif;
+}
+/**********************title*************************/
+.title{
+  color: #000000;
+  font-size: 50px;
+  font-weight: 700;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.title span{
+  color: #dcdcdc;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/************************table***************************/
+table{
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+table thead{
+  background-color: #d3d3d3;
+  text-align: left;
+  font-weight: bold;
+  
+}
+.Addpadding{
+  padding: 20px 20px !important;
+}
+
+table td{
+  padding: 20px 20px;
+}
+table tbody tr:nth-child(odd){background-color:#e8e8e8}
+table tbody tr:hover{
+  background-color: #d3d3d3;
+}
+/***********************responsive************************/
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
   }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/**********************pagination*************************/
+.paginationStyle{
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+}
+.btn{
+  background: none;
+  border: hidden;
+  font-size: 30px;
+  cursor: pointer;
+}
+.btn.disabled {
+  pointer-events: none;
+  box-shadow: none;
+  color: #999;
+}
+/**********************Filter*************************/
+.container{
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  width: 100%;
+}
+.filterBySearch{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 33.3%;
+}
+.filterBySearch label{
+  font-size: 20px;
+  font-weight: 700;
+}
+.filterBySearch input{
+  border: none;
+  border-bottom: 2px solid #000000;
+  margin: 20px 0;
+}
+.filterByCheck{
+  display: flex;
+  flex-direction: column;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.filterByCheck span{
+  font-size: 20px;
+  font-weight: 700;
 }
