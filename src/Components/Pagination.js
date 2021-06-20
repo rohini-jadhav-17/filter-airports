@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaArrowLeft, FaArrowRight} from "react-icons/fa";
 
-const Pagination = ({currentPage, firstPage, lastPage, totalResults, prevPage, nextPage, disabledP}) =>{
+const Pagination = ({currentPage, firstPage, lastPage, totalResults, prevPage, nextPage}) =>{
     return(
         <nav className="paginationStyle">
             <button 

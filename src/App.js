@@ -14,6 +14,7 @@ const App = () =>{
   const[data, setData] = useState([]);
   const[currentPage, setCurrentPage] = useState(1);
   const[dataPerPage] = useState(4);
+  
 
   //get currentData
   const indexOfLastData = currentPage * dataPerPage; //4
@@ -35,48 +36,78 @@ const App = () =>{
     {name : "Large", key:'large'},
     {name : "Heliport", key:'heliport'},
     {name : "Closed", key:'closed'},
-    {name : "In your favorites", key:'in your favorites'}
+    {name : "In your favorites", key:'in_your_favorites'}
   ];
-  //looping through airportsJson
-  useEffect(()=>{
-    const fetchAirports = () =>{
-      setLoading(true);
-      const res = airportsJson;
-      console.log(res);
-      setData(res);
-      setLoading(false);
-    }
-    fetchAirports()
-  },[]);
-
   
   const prevPage = () =>{
     setCurrentPage(page => page - 1);
+    setData(currentData);
   }
 
   const nextPage = () =>{
-    setCurrentPage(page => page + 1)
+    setCurrentPage(page => page + 1);
+    setData(currentData);
   }
   
+  const searchData = (value) =>{
+    const filterData = airportsJson.filter(val => (val.name.toLowerCase().includes(value.toLowerCase()) || 
+                                                   val.icao.toLowerCase().includes(value.toLowerCase()) ||
+                                                   (val.iata && val.iata.toLowerCase().includes(value.toLowerCase())) || 
+                                                   (val.elevation === value) ||
+                                                   (val.latitude === value) || 
+                                                   (val.longitude === value) ));
+
+    const filterDataUpdated = filterData.slice(indexOfFirstData,indexOfLastData);                                              
+    setData(filterDataUpdated);
+  }
+  
+  const searchCheckData = (value) =>{
+    
+    //const trial = airportsJson.filter(val1 => {return value.includes(val1.type)});
+    //const filterCheckData = airportsJson.filter(val => { value.map(val =>  val.toLowerCase().includes(val.type))});
+    //const filterCheckUpdated = filterCheckData.slice(indexOfFirstData,indexOfLastData);
+    setData(value);
+    console.log(value);
+  }
+
+  useEffect(()=>{
+    const items = JSON.parse(localStorage.getItem('Data'));
+    if(items){
+      setData(items);
+    }
+    
+  },[]);
+
+  useEffect(()=>{
+      setLoading(true);
+      localStorage.setItem('Data', JSON.stringify(currentData)); 
+      setLoading(false); 
+  },[]);
+
   return (
     <div className="App">
-      <Title 
-        title='Filter' 
-        titleSpan='airports'
-      />
-      <Filter checkType={checkType}/>
-      <Table 
-        headers={headers} 
-        currentData={currentData}
-      />
-      <Pagination 
-        currentPage={currentPage}
-        firstPage={indexOfFirstData+1} 
-        lastPage={indexOfLastData} 
-        totalResults={airportsJson.length} 
-        prevPage={prevPage} 
-        nextPage={nextPage}
-      /> 
+      {loading ? 'loading.....' : 
+      <>
+        <Title 
+          title='Filter' 
+          titleSpan='airports'
+        />
+        <Filter checkType={checkType} searchData={(value) =>searchData(value)} airportsJson={airportsJson} searchCheckData={(value)=> searchCheckData(value)}/>
+        <Table 
+          headers={headers} 
+          currentData={data}
+        />
+        <Pagination 
+          currentPage={currentPage}
+          firstPage={indexOfFirstData+1} 
+          lastPage={indexOfLastData} 
+          totalResults={airportsJson.length} 
+          prevPage={prevPage} 
+          nextPage={nextPage}
+        /> 
+      </>
+      }
+      
     </div>
   );
 }

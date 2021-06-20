@@ -110,18 +110,38 @@ table tbody tr:hover{
 .filterBySearch label{
   font-size: 20px;
   font-weight: 700;
+  padding-bottom: 20px;
 }
 .filterBySearch input{
   border: none;
-  border-bottom: 2px solid #000000;
-  margin: 20px 0;
+  border-bottom: 1px solid #000000;
+  margin-bottom: 20px;
+  padding: 8px 0;
+  display: block;
 }
 .filterByCheck{
-  display: flex;
-  flex-direction: column;
+  width: 66.6%;
+}
+.filterByCheck input{
+  cursor: pointer;
+  border-radius: 4px;
+}
+.filterByCheck input:checked {
+  border: 1px solid #000 !important;
+  background-color: #000000 !important;
 }
 
+
 .filterByCheck span{
+  display: block;
   font-size: 20px;
   font-weight: 700;
+  padding-bottom: 20px;
+}
+.filterByCheck .checkPosition{
+  display: inline-block;
+  width: 11.1%;
+}
+.filterByCheck label{
+  width: 100px;
 }
