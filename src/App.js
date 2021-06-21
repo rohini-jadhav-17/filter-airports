@@ -50,24 +50,23 @@ const App = () =>{
   }
   
   const searchData = (value) =>{
-    console.log(value);
+    //console.log(value);
     const filterData = airportsJson.filter(val =>  (val.name.toLowerCase().startsWith(value.toLowerCase()) ||
                                                     val.icao.toLowerCase().startsWith(value.toLowerCase()) ||
-                                                    (val.iata && val.iata.toLowerCase().startsWith(value.toLowerCase()) ||
+                                                    (val.iata && val.iata.toLowerCase().startsWith(value.toLowerCase())) ||
                                                     (val.elevation === value) ||
                                                     (val.latitude === value) ||
-                                                    (val.longitude === value))));
-    console.log(filterData.length);
+                                                    (val.longitude === value)));
+    //console.log(filterData.length);
     const filterDataUpdated = filterData.slice(indexOfFirstData,indexOfLastData);                                              
     setData(filterDataUpdated);
     setTotalResults(filterData.length);
   }
   
   const searchCheckData = (filterCheckData) =>{
-    const filterCheckDataUpdated = filterCheckData.slice(indexOfFirstData,indexOfLastData); 
-    setData(filterCheckDataUpdated);
-    console.log(filterCheckDataUpdated);
-    setTotalResults(filterCheckData.length);
+      const filterCheckDataUpdated = filterCheckData.slice(indexOfFirstData,indexOfLastData); 
+      setData(filterCheckDataUpdated);
+      filterCheckData.length ? setTotalResults(filterCheckData.length) : setTotalResults(airportsJson.length)
   }
 
   useEffect(()=>{
@@ -92,7 +91,10 @@ const App = () =>{
           title='Filter' 
           titleSpan='airports'
         />
-        <Filter checkType={checkType} searchData={(value) =>searchData(value)} airportsJson={airportsJson} searchCheckData={(value)=> searchCheckData(value)}/>
+        <Filter checkType={checkType} 
+          searchData={(value) =>searchData(value)} 
+          airportsJson={airportsJson} 
+          searchCheckData={(value)=> searchCheckData(value)}/>
         <Table 
           headers={headers} 
           currentData={data}

@@ -8,12 +8,17 @@
   color: #000000;
   font-size: 50px;
   font-weight: 700;
+  animation-name: fadeIn;
+  animation-duration: 5s;
 }
 
 .title span{
   color: #dcdcdc;
 }
-
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
 /************************table***************************/
 table{
   display: table;

@@ -12,6 +12,7 @@
     "react-icons": "^4.2.0",
     "react-lodash": "^0.1.2",
     "react-scripts": "4.0.3",
+    "react-spring": "^9.2.3",
     "use-debounce": "^7.0.0",
     "web-vitals": "^1.1.2"
   },
