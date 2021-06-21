@@ -14,7 +14,7 @@ const App = () =>{
   const[data, setData] = useState([]);
   const[currentPage, setCurrentPage] = useState(1);
   const[dataPerPage] = useState(4);
-  
+  const[totalResults, setTotalResults] = useState(airportsJson.length);
 
   //get currentData
   const indexOfLastData = currentPage * dataPerPage; //4
@@ -60,15 +60,14 @@ const App = () =>{
     console.log(filterData.length);
     const filterDataUpdated = filterData.slice(indexOfFirstData,indexOfLastData);                                              
     setData(filterDataUpdated);
+    setTotalResults(filterData.length);
   }
   
-  const searchCheckData = (value) =>{
-    
-    //const trial = airportsJson.filter(val1 => {return value.includes(val1.type)});
-    //const filterCheckData = airportsJson.filter(val => { value.map(val =>  val.toLowerCase().includes(val.type))});
-    //const filterCheckUpdated = filterCheckData.slice(indexOfFirstData,indexOfLastData);
-    setData(value);
-    console.log(value);
+  const searchCheckData = (filterCheckData) =>{
+    const filterCheckDataUpdated = filterCheckData.slice(indexOfFirstData,indexOfLastData); 
+    setData(filterCheckDataUpdated);
+    console.log(filterCheckDataUpdated);
+    setTotalResults(filterCheckData.length);
   }
 
   useEffect(()=>{
@@ -102,7 +101,7 @@ const App = () =>{
           currentPage={currentPage}
           firstPage={indexOfFirstData+1} 
           lastPage={indexOfLastData} 
-          totalResults={airportsJson.length} 
+          totalResults={totalResults} 
           prevPage={prevPage} 
           nextPage={nextPage}
         /> 

@@ -11,7 +11,7 @@ const Pagination = ({currentPage, firstPage, lastPage, totalResults, prevPage, n
             >
                 <FaArrowLeft/>
             </button>
-    <span>showing <strong>{firstPage}-{lastPage}</strong> of <strong>{totalResults}</strong> results</span>
+                <span>showing <strong>{firstPage}-{lastPage}</strong> of <strong>{totalResults}</strong> results</span>
             <button 
                 className={`btn ${currentPage === totalResults ? 'disabled' : ''}`}
                 onClick={nextPage}

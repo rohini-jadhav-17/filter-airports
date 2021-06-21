@@ -38,9 +38,91 @@ table tbody tr:nth-child(odd){background-color:#e8e8e8}
 table tbody tr:hover{
   background-color: #d3d3d3;
 }
+
+/**********************pagination*************************/
+.paginationStyle{
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+}
+.btn{
+  background: none;
+  border: hidden;
+  font-size: 30px;
+  cursor: pointer;
+}
+.btn.disabled {
+  pointer-events: none;
+  box-shadow: none;
+  color: #999;
+}
+/**********************Filter*************************/
+.container{
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  width: 100%;
+}
+.filterBySearch{
+  display: flex;
+  flex-direction: column;
+  width: 33.3%;
+}
+.filterBySearch label{
+  font-size: 20px;
+  font-weight: 700;
+  padding-bottom: 14px;
+}
+.filterBySearch input{
+  border: none;
+  border-bottom: 1px solid #000000;
+  margin-bottom: 20px;
+  padding: 8px 0;
+  display: block;
+}
+.filterByCheck{
+  width: 61.6%;
+  display: flex;
+  flex-direction: column;
+}
+.filterByCheck .adjust{
+  display: flex;
+  justify-content: space-between;
+}
+.filterByCheck input{
+  cursor: pointer;
+  border-radius: 4px;
+}
+.filterByCheck input:checked {
+  border: 1px solid #000 !important;
+  background-color: #000000 !important;
+}
+
+.filterByCheck span{
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+.filterByCheck .checkPosition{
+  display: inline;
+}
+.filterByCheck label{
+}
+
+.checkbox:not(:checked),.checkbox:checked{
+  width: 15px;
+  height: 15px;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
 /***********************responsive************************/
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
+  .filterByCheck .adjust{
+    display: flex;
+    flex-direction: column;
+  }
   table {
     border: 0;
   }
@@ -77,71 +159,4 @@ table tbody tr:hover{
   table td:last-child {
     border-bottom: 0;
   }
-}
-/**********************pagination*************************/
-.paginationStyle{
-  display: flex;
-  justify-content: space-between;
-  margin: 30px 0;
-}
-.btn{
-  background: none;
-  border: hidden;
-  font-size: 30px;
-  cursor: pointer;
-}
-.btn.disabled {
-  pointer-events: none;
-  box-shadow: none;
-  color: #999;
-}
-/**********************Filter*************************/
-.container{
-  display: flex;
-  justify-content: space-between;
-  margin: 30px 0;
-  width: 100%;
-}
-.filterBySearch{
-  display: flex;
-  flex-direction: column;
-  width: 33.3%;
-}
-.filterBySearch label{
-  font-size: 20px;
-  font-weight: 700;
-  padding-bottom: 20px;
-}
-.filterBySearch input{
-  border: none;
-  border-bottom: 1px solid #000000;
-  margin-bottom: 20px;
-  padding: 8px 0;
-  display: block;
-}
-.filterByCheck{
-  width: 66.6%;
-}
-.filterByCheck input{
-  cursor: pointer;
-  border-radius: 4px;
-}
-.filterByCheck input:checked {
-  border: 1px solid #000 !important;
-  background-color: #000000 !important;
-}
-
-
-.filterByCheck span{
-  display: block;
-  font-size: 20px;
-  font-weight: 700;
-  padding-bottom: 20px;
-}
-.filterByCheck .checkPosition{
-  display: inline-block;
-  width: 11.1%;
-}
-.filterByCheck label{
-  width: 100px;
 }
