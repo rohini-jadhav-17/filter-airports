@@ -50,13 +50,14 @@ const App = () =>{
   }
   
   const searchData = (value) =>{
-    const filterData = airportsJson.filter(val => (val.name.toLowerCase().includes(value.toLowerCase()) || 
-                                                   val.icao.toLowerCase().includes(value.toLowerCase()) ||
-                                                   (val.iata && val.iata.toLowerCase().includes(value.toLowerCase())) || 
-                                                   (val.elevation === value) ||
-                                                   (val.latitude === value) || 
-                                                   (val.longitude === value) ));
-
+    console.log(value);
+    const filterData = airportsJson.filter(val =>  (val.name.toLowerCase().startsWith(value.toLowerCase()) ||
+                                                    val.icao.toLowerCase().startsWith(value.toLowerCase()) ||
+                                                    (val.iata && val.iata.toLowerCase().startsWith(value.toLowerCase()) ||
+                                                    (val.elevation === value) ||
+                                                    (val.latitude === value) ||
+                                                    (val.longitude === value))));
+    console.log(filterData.length);
     const filterDataUpdated = filterData.slice(indexOfFirstData,indexOfLastData);                                              
     setData(filterDataUpdated);
   }

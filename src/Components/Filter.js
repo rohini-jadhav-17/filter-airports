@@ -1,10 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
+import { useDebouncedCallback } from 'use-debounce';
+import _ from "lodash";
 
 const Filter = (props) =>{
     const[searchTerm, setSearchTerm] = useState("");
     const[categories, setCategories] = useState(null);
     const[currentCategories, setCurrentCategories] = useState([]);
     
+
+    const delayedQuery = useCallback(
+        _.debounce((q) => props.searchData(q), 1000),
+        []
+      );
 
     useEffect(()=>{
         const category = props.checkType.map((category) =>{
@@ -15,12 +22,22 @@ const Filter = (props) =>{
         // console.log(categories);
     },[])
 
+    // const debounced = useDebouncedCallback(
+    //     // function
+    //     (searchTerm) => {
+    //         setSearchTerm(searchTerm);
+    //     },
+    //     // delay in ms
+    //     300
+    //   );
+      
     const handleSearch = (e) =>{
-        e.preventDefault();
-        setSearchTerm(e.target.value);
-        console.log(searchTerm);
-        props.searchData(searchTerm);
+        delayedQuery(e.target.value);
+
+        //console.log(searchTerm);
+        //props.searchData(searchTerm);
     }
+
     const handleChecked = (e) =>{
         console.dir(e.target);
         const checkCategory = e.target.name;
@@ -40,12 +57,18 @@ const Filter = (props) =>{
             return cat.name;
         })
         console.log(catNames);
-        const trial2 = catNames.join(',');
-        console.log(trial2);
+        // const trial2 = catNames.join(',');
+        // console.log(trial2);
         setCurrentCategories(updated);
         console.log(currentCategories);
         // props.searchCheckData(catNames);
-        const trial = props.airportsJson.filter(val1 => (catNames.includes(val1.type) ));
+        // const trial1 = catNames.map(type => {
+        //     const trial3= props.airportsJson.filter(val => type.includes(val.type));
+        //     console.log(trial3);
+        // })
+        
+
+        const trial = props.airportsJson.filter(val1 => (catNames.name === val1.type) );
         props.searchCheckData(trial);
         // setCategories(e.target.checked);
         // //const currentIndex = check.lastIndexOf(1);
@@ -63,30 +86,11 @@ const Filter = (props) =>{
                             type="checkbox" 
                             value = {category.name}                           
                             name={category.name}
-                            onChange={(e)=> handleChecked(e)}
+                            onChange={(e)=> (handleChecked(e))}
                         />
                         <label>{category.name}</label>
                     </div>
-                ))}
-                {/* <div className="checkPosition" key='small'>
-                        <input 
-                            type="checkbox" 
-                            value = 'small'                           
-                            name='small'
-                            onChange={(e)=> handleChecked(e)}
-                        />
-                        <label>small</label>
-                </div>
-                <div className="checkPosition" key='large'>
-                        <input 
-                            type="checkbox" 
-                            value = 'large'                           
-                            name='large'
-                            onChange={(e)=> handleChecked(e)}
-                        />
-                        <label>large</label>
-                </div> */}
-                
+                ))}                
             </div>
             <div className="filterBySearch"> 
                 <label>Filter by search</label>
